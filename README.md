@@ -7,7 +7,8 @@ validated, documented API — and understand the relationship between
 **Module → Controller → Service → Prisma → PostgreSQL**.
 
 It's for developers who are brand new to NestJS, or who've only skimmed
-the docs. No prior production backend experience assumed.
+the [official docs](https://docs.nestjs.com/). No prior production
+backend experience assumed.
 
 ## Table of Contents
 
@@ -41,3 +42,10 @@ Swagger UI to try it all from the browser.
 holds the complete project in its Part 9 end state, ready to run. Build it
 yourself by following the parts in order — then use that folder to
 compare against when something doesn't line up.
+
+## Learn more
+
+This crash course covers the ground you need for one working API, not
+the whole framework. For everything beyond that — deeper dives into
+guards, interceptors, middleware, authentication, microservices, and
+more — see the [official NestJS documentation](https://docs.nestjs.com/).
