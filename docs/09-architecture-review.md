@@ -34,18 +34,18 @@ Every file here was built incrementally, in this order:
 
 | Part | Added |
 | --- | --- |
-| [1](../01-setup-and-project-creation/README.md) | The project itself, `main.ts` |
-| [2](../02-modules/README.md) | `tasks.module.ts` |
-| [3](../03-controllers-and-routing/README.md) | `tasks.controller.ts` |
-| [4](../04-services-and-dependency-injection/README.md) | `tasks.service.ts` (in-memory) |
-| [5](../05-dto-and-validation/README.md) | `dto/`, `ValidationPipe` |
-| [6](../06-database-integration/README.md) | `prisma/`, `tasks.service.ts` rewritten against Prisma |
-| [7](../07-error-handling/README.md) | `NotFoundException` / `ConflictException` usage |
-| [8](../08-api-documentation-swagger/README.md) | Swagger UI at `/api` |
+| [1](01-setup-and-project-creation.md) | The project itself, `main.ts` |
+| [2](02-modules.md) | `tasks.module.ts` |
+| [3](03-controllers-and-routing.md) | `tasks.controller.ts` |
+| [4](04-services-and-dependency-injection.md) | `tasks.service.ts` (in-memory) |
+| [5](05-dto-and-validation.md) | `dto/`, `ValidationPipe` |
+| [6](06-database-integration.md) | `prisma/`, `tasks.service.ts` rewritten against Prisma |
+| [7](07-error-handling.md) | `NotFoundException` / `ConflictException` usage |
+| [8](08-api-documentation-swagger.md) | Swagger UI at `/api` |
 
 ## 2. The Request Lifecycle
 
-![Full request lifecycle from request to database and back](assets/final-structure.svg)
+![Full request lifecycle from request to database and back](assets/09-architecture-review/final-structure.svg)
 
 Every request into `/tasks` now travels the same path:
 

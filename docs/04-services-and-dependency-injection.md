@@ -12,7 +12,7 @@
 
 ## 1. What Is a Service?
 
-![Request flowing from Controller to Service to data](assets/request-flow.svg)
+![Request flowing from Controller to Service to data](assets/04-services-and-dependency-injection/request-flow.svg)
 
 A **service** is a class decorated with `@Injectable()` that holds
 business logic and data access — everything a controller shouldn't have
@@ -37,7 +37,7 @@ reusable and independently testable.
 
 ## 3. Dependency Injection, Concretely
 
-In [Part 3](../03-controllers-and-routing/README.md), `TasksController`
+In [Part 3](03-controllers-and-routing.md), `TasksController`
 already declared this:
 
 ```ts
@@ -56,9 +56,9 @@ it — you don't wire it by hand.
 
 ## 4. Moving Real Logic Into `TasksService`
 
-Replace the placeholder methods from [Part 3](../03-controllers-and-routing/README.md)
+Replace the placeholder methods from [Part 3](03-controllers-and-routing.md)
 with an in-memory implementation — real persistence arrives in
-[Part 6](../06-database-integration/README.md), but the shape of the
+[Part 6](06-database-integration.md), but the shape of the
 service won't change, only what's inside these methods:
 
 ```ts
@@ -110,7 +110,7 @@ export class TasksService {
 
 `TasksController` doesn't need to change at all — it already just calls
 `this.tasksService.*`. That's the payoff of the controller/service split:
-the HTTP layer was done in [Part 3](../03-controllers-and-routing/README.md)
+the HTTP layer was done in [Part 3](03-controllers-and-routing.md)
 and stays untouched while the real logic gets built underneath it.
 
 ## 5. Beginner Pitfalls
@@ -124,8 +124,8 @@ and stays untouched while the real logic gets built underneath it.
   concurrent requests will stomp on each other's data.
 - **Reaching into another module's service directly.** If `OrdersService`
   needs `TasksService`, it must be exported from `TasksModule` and
-  imported into `OrdersModule` — see [Part 2](../02-modules/README.md).
+  imported into `OrdersModule` — see [Part 2](02-modules.md).
 
 ---
 
-Next: [Part 5 — DTOs & Validation](../05-dto-and-validation/README.md)
+Next: [Part 5 — DTOs & Validation](05-dto-and-validation.md)

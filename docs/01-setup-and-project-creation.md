@@ -56,7 +56,7 @@ DELETE /tasks/:id
 ```
 
 Every part in this crash course adds one layer to the same project. By
-[Part 9](../09-architecture-review/README.md) it's validated, backed by a
+[Part 9](09-architecture-review.md) it's validated, backed by a
 real PostgreSQL database, and documented with Swagger.
 
 ## 4. Requirements & Installing the CLI
@@ -130,7 +130,7 @@ Four files matter most right now:
 - **`app.module.ts`** — the **root module**. Every other module in the app
   eventually gets imported here, directly or indirectly.
 - **`app.controller.ts`** — a placeholder controller with one route
-  (`GET /`), which you'll replace with your own in [Part 3](../03-controllers-and-routing/README.md).
+  (`GET /`), which you'll replace with your own in [Part 3](03-controllers-and-routing.md).
 - **`app.service.ts`** — a placeholder service the controller calls into.
 
 ```ts
@@ -166,7 +166,7 @@ served by the placeholder `AppController`.
   builds once and exits on changes; `start:dev` watches. Use `start:dev`
   for everything in this crash course.
 - **Editing `main.ts` to add routes.** `main.ts` only bootstraps the app —
-  routes belong in controllers ([Part 3](../03-controllers-and-routing/README.md)),
+  routes belong in controllers ([Part 3](03-controllers-and-routing.md)),
   never here.
 - **Port already in use.** If `3000` is taken by another process, either
   stop that process or start on a different port — `app.listen` already
@@ -174,4 +174,4 @@ served by the placeholder `AppController`.
 
 ---
 
-Next: [Part 2 — Modules](../02-modules/README.md)
+Next: [Part 2 — Modules](02-modules.md)

@@ -47,7 +47,7 @@ built-in exception layer and turned into the matching HTTP response.
 | `InternalServerErrorException` | 500 | Unexpected server-side failure |
 
 `TasksService` already throws `NotFoundException` in
-[Part 6](../06-database-integration/README.md) — this part is about
+[Part 6](06-database-integration.md) — this part is about
 recognizing *when* to reach for each one, not introducing new syntax.
 
 ## 3. Using Them in `TasksService`
@@ -110,9 +110,9 @@ Run that same command twice — the second call returns `409 Conflict`.
   and formats the response. Catch only where you plan to actually handle
   or transform the error.
 - **Returning `200` with an error message in the body.** This defeats the
-  point of status codes — callers (and tools like Swagger, [Part 8](../08-api-documentation-swagger/README.md))
+  point of status codes — callers (and tools like Swagger, [Part 8](08-api-documentation-swagger.md))
   can no longer tell success from failure without parsing the body.
 
 ---
 
-Next: [Part 8 — API Documentation with Swagger](../08-api-documentation-swagger/README.md)
+Next: [Part 8 — API Documentation with Swagger](08-api-documentation-swagger.md)

@@ -49,53 +49,49 @@ GraphQL, file upload, advanced database patterns.
 nestjs-crash-course-2026/
 ├── CLAUDE.md                              # this file
 ├── README.md                              # intro + table of contents
-├── 01-setup-and-project-creation/
-│   └── README.md
-├── 02-modules/
-│   └── README.md
-├── 03-controllers-and-routing/
-│   └── README.md
-├── 04-services-and-dependency-injection/
-│   ├── README.md
-│   └── assets/*.svg
-├── 05-dto-and-validation/
-│   └── README.md
-├── 06-database-integration/
-│   ├── README.md
-│   └── assets/*.svg
-├── 07-error-handling/
-│   └── README.md
-├── 08-api-documentation-swagger/
-│   └── README.md
-├── 09-architecture-review/
-│   ├── README.md
-│   └── assets/*.svg
-└── task-management-api/                   # reference implementation
-    ├── README.md
-    ├── docker-compose.yml                 # PostgreSQL for local dev
-    ├── prisma/schema.prisma
-    └── src/{main.ts,app.module.ts,prisma/,tasks/}
+├── docs/
+│   ├── 01-setup-and-project-creation.md
+│   ├── 02-modules.md
+│   ├── 03-controllers-and-routing.md
+│   ├── 04-services-and-dependency-injection.md
+│   ├── 05-dto-and-validation.md
+│   ├── 06-database-integration.md
+│   ├── 07-error-handling.md
+│   ├── 08-api-documentation-swagger.md
+│   ├── 09-architecture-review.md
+│   └── assets/
+│       ├── 04-services-and-dependency-injection/*.svg
+│       ├── 06-database-integration/*.svg
+│       └── 09-architecture-review/*.svg
+└── examples/
+    └── task-management-api/               # reference implementation
+        ├── README.md
+        ├── docker-compose.yml             # PostgreSQL for local dev
+        ├── prisma/schema.prisma
+        └── src/{main.ts,app.module.ts,prisma/,tasks/}
 ```
 
-Each numbered folder is a self-contained tutorial doc following the
+Each file in `docs/` is a self-contained tutorial doc following the
 conventions below, but assumes the reader has followed the prior parts in
-order (same project, growing file tree). `assets/` (where present) holds
-that part's diagrams as plain SVG files.
+order (same project, growing file tree). `docs/assets/0N-slug/` (where
+present) holds that part's diagrams as plain SVG files.
 
-`task-management-api/` is the **runnable reference implementation** — the
-one project, in its Part 9 end state only (not a snapshot per part). It
-exists so students can diff against a known-good version, and so the code
-in the docs is verifiable rather than assumed. Two rules follow from that:
+`examples/task-management-api/` is the **runnable reference
+implementation** — the one project, in its Part 9 end state only (not a
+snapshot per part). It exists so students can diff against a known-good
+version, and so the code in the docs is verifiable rather than assumed.
+Two rules follow from that:
 
 - **The docs and the app must not drift.** Any code change in one has to
-  land in the other in the same pass — a snippet in a part's `README.md`
-  should be copy-pasteable into the reference app and match what's there.
+  land in the other in the same pass — a snippet in a part's `docs/*.md`
+  file should be copy-pasteable into the reference app and match what's
+  there.
 - **It is the crash course's app.** It must stay standalone and never
   reference or depend on anything outside this repo.
 
 ## Content conventions
 
-- Each part's `README.md` is structured as: `# Part N: Title` →
+- Each part's `docs/0N-slug.md` file is structured as: `# Part N: Title` →
   `## Table of Contents` (linking to the `##` sections below) → `---` →
   numbered `## <N>. <Subtopic>` sections matching the TOC.
 - Written as a tutorial doc, not a video script — no "intro/outro," no
@@ -105,11 +101,11 @@ in the docs is verifiable rather than assumed. Two rules follow from that:
   for real, runnable commands/code.
 - Favor a diagram over a paragraph: any section describing a flow,
   comparison, or set of components leads with a simple SVG diagram
-  (stored in that part's `assets/` folder) followed by a short bullet
-  list — keep prose to a few lines per section. Diagrams are simple,
-  clean SVGs (boxes, arrows, labels), viewBox-based, no external assets,
-  2-6 boxes, readable at a glance. Not every part needs one — only add a
-  diagram where it genuinely clarifies a flow or structure.
+  (stored in `docs/assets/0N-slug/`) followed by a short bullet list —
+  keep prose to a few lines per section. Diagrams are simple, clean SVGs
+  (boxes, arrows, labels), viewBox-based, no external assets, 2-6 boxes,
+  readable at a glance. Not every part needs one — only add a diagram
+  where it genuinely clarifies a flow or structure.
 - Cross-link related parts with relative markdown links (e.g. Part 3
   building on Part 2's module).
 - Code examples are real, runnable, and copy-pasteable against the one
@@ -117,6 +113,5 @@ in the docs is verifiable rather than assumed. Two rules follow from that:
   consistent with NestJS's actual APIs (see https://docs.nestjs.com) and
   with the file state left by the previous part.
 - End each part with a short "Beginner Pitfalls" section (2-3 items) and
-  a "Next: [Part N+1 — Title](../0N-slug/README.md)" link (final part
-  links back to the crash course [README](../README.md) and the paid
-  cohort instead).
+  a "Next: [Part N+1 — Title](0N-slug.md)" link (final part links back to
+  the crash course [README](../README.md) and the paid cohort instead).

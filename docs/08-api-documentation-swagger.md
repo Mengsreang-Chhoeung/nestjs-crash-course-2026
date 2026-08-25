@@ -82,7 +82,7 @@ export class CreateTaskDto {
 }
 ```
 
-`UpdateTaskDto` (from [Part 5](../05-dto-and-validation/README.md))
+`UpdateTaskDto` (from [Part 5](05-dto-and-validation.md))
 already reuses these via `PartialType` — no changes needed there;
 `@nestjs/swagger`'s `PartialType` (a drop-in replacement for the one from
 `@nestjs/mapped-types`) carries the `@ApiProperty()` metadata through
@@ -124,7 +124,7 @@ real `POST` or `PATCH` without leaving the browser.
 
 - **Forgetting `@nestjs/swagger`'s `PartialType`.** If `UpdateTaskDto`
   still imports `PartialType` from `@nestjs/mapped-types` (as in
-  [Part 5](../05-dto-and-validation/README.md)), it still works — but
+  [Part 5](05-dto-and-validation.md)), it still works — but
   switching to `@nestjs/swagger`'s version is what carries the
   `@ApiProperty()` metadata into the generated docs for `PATCH`.
 - **Exposing `/api` in production without thinking about it.** Swagger UI
@@ -138,4 +138,4 @@ real `POST` or `PATCH` without leaving the browser.
 
 ---
 
-Next: [Part 9 — Architecture Review](../09-architecture-review/README.md)
+Next: [Part 9 — Architecture Review](09-architecture-review.md)

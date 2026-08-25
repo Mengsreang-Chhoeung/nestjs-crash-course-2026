@@ -16,9 +16,9 @@ A NestJS **module** is a class decorated with `@Module()` that tells Nest
 how a group of related files fit together:
 
 - `controllers` — classes handling incoming HTTP requests (built in
-  [Part 3](../03-controllers-and-routing/README.md)).
+  [Part 3](03-controllers-and-routing.md)).
 - `providers` — classes (usually services) holding logic, injectable
-  elsewhere (built in [Part 4](../04-services-and-dependency-injection/README.md)).
+  elsewhere (built in [Part 4](04-services-and-dependency-injection.md)).
 - `imports` — other modules this module depends on.
 - `exports` — which of this module's providers other modules may use.
 
@@ -107,4 +107,4 @@ ultimately gets registered, directly or through another module.
 
 ---
 
-Next: [Part 3 — Controllers & Routing](../03-controllers-and-routing/README.md)
+Next: [Part 3 — Controllers & Routing](03-controllers-and-routing.md)

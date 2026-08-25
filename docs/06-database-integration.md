@@ -21,10 +21,10 @@ survives restarts and can be queried properly. This crash course uses
 used in the paid, live cohort this crash course previews — so what you
 build here transfers directly.
 
-![Client through Controller, Service, PrismaService, to PostgreSQL](assets/layered-architecture.svg)
+![Client through Controller, Service, PrismaService, to PostgreSQL](assets/06-database-integration/layered-architecture.svg)
 
-- **Controller** — unchanged from [Part 3](../03-controllers-and-routing/README.md).
-- **Service** — same public methods as [Part 4](../04-services-and-dependency-injection/README.md),
+- **Controller** — unchanged from [Part 3](03-controllers-and-routing.md).
+- **Service** — same public methods as [Part 4](04-services-and-dependency-injection.md),
   now backed by Prisma instead of an array.
 - **PrismaService** — wraps Prisma's generated client so it can be
   injected like any other provider.
@@ -110,7 +110,7 @@ model Task {
 }
 ```
 
-This mirrors the `Task` shape from [Part 4](../04-services-and-dependency-injection/README.md) —
+This mirrors the `Task` shape from [Part 4](04-services-and-dependency-injection.md) —
 Prisma's schema is the new single source of truth for it.
 
 ## 4. Running the Migration
@@ -166,7 +166,7 @@ export class PrismaModule {}
 
 `PrismaModule` exports `PrismaService` so any other module — like
 `TasksModule` — can import `PrismaModule` and inject it, the same pattern
-from [Part 2](../02-modules/README.md).
+from [Part 2](02-modules.md).
 
 ```ts
 // src/tasks/tasks.module.ts
@@ -185,7 +185,7 @@ export class TasksModule {}
 
 ## 6. Rewriting `TasksService` Against Prisma
 
-Same public method signatures as [Part 4](../04-services-and-dependency-injection/README.md) —
+Same public method signatures as [Part 4](04-services-and-dependency-injection.md) —
 `TasksController` doesn't change at all — only what's inside each method:
 
 ```ts
@@ -229,7 +229,7 @@ export class TasksService {
 `findOne` inside `update`/`remove` isn't redundant — it's what turns
 Prisma's own "record not found" error into the same `NotFoundException`
 used everywhere else, so callers get one consistent error shape. That
-shape gets formalized in [Part 7](../07-error-handling/README.md).
+shape gets formalized in [Part 7](07-error-handling.md).
 
 ## 7. Beginner Pitfalls
 
@@ -242,9 +242,9 @@ shape gets formalized in [Part 7](../07-error-handling/README.md).
 - **Calling `prisma.task.update` without checking existence first.**
   Prisma throws its own `PrismaClientKnownRequestError` (code `P2025`) on
   a missing record, not a Nest `NotFoundException` — hence the explicit
-  `findOne` guard above, which [Part 7](../07-error-handling/README.md)
+  `findOne` guard above, which [Part 7](07-error-handling.md)
   builds on.
 
 ---
 
-Next: [Part 7 — Error Handling](../07-error-handling/README.md)
+Next: [Part 7 — Error Handling](07-error-handling.md)

@@ -36,7 +36,7 @@ your method as a plain argument — no manual parsing.
 
 For now the controller calls placeholder methods on `TasksService` that
 just return hardcoded data — real logic moves into the service properly in
-[Part 4](../04-services-and-dependency-injection/README.md). This part
+[Part 4](04-services-and-dependency-injection.md). This part
 is about getting the five routes wired up and reachable.
 
 ```ts
@@ -117,11 +117,11 @@ params start as strings) into a number, and rejects the request with a
 `400` if it isn't numeric.
 
 > **Note:** `@Body() body: any` is deliberately loose for this part — real
-> input shapes and validation arrive in [Part 5](../05-dto-and-validation/README.md).
+> input shapes and validation arrive in [Part 5](05-dto-and-validation.md).
 
 ## 4. Trying It
 
-With `npm run start:dev` running from [Part 1](../01-setup-and-project-creation/README.md):
+With `npm run start:dev` running from [Part 1](01-setup-and-project-creation.md):
 
 ```bash
 curl http://localhost:3000/tasks
@@ -143,9 +143,9 @@ Every route responds — with placeholder data for now.
   `undefined`.
 - **Putting logic directly in the controller.** It's tempting to compute
   the response inline here instead of delegating to the service — resist
-  it now, before it becomes a habit. See [Part 4](../04-services-and-dependency-injection/README.md)
+  it now, before it becomes a habit. See [Part 4](04-services-and-dependency-injection.md)
   for why.
 
 ---
 
-Next: [Part 4 — Services & Dependency Injection](../04-services-and-dependency-injection/README.md)
+Next: [Part 4 — Services & Dependency Injection](04-services-and-dependency-injection.md)

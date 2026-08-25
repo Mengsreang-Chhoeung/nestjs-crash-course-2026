@@ -11,15 +11,15 @@ the docs. No prior production backend experience assumed.
 
 ## Table of Contents
 
-1. [Setup & Project Creation](01-setup-and-project-creation/README.md)
-2. [Modules](02-modules/README.md)
-3. [Controllers & Routing](03-controllers-and-routing/README.md)
-4. [Services & Dependency Injection](04-services-and-dependency-injection/README.md)
-5. [DTOs & Validation](05-dto-and-validation/README.md)
-6. [Database Integration (Prisma + PostgreSQL)](06-database-integration/README.md)
-7. [Error Handling](07-error-handling/README.md)
-8. [API Documentation with Swagger](08-api-documentation-swagger/README.md)
-9. [Architecture Review](09-architecture-review/README.md)
+1. [Setup & Project Creation](docs/01-setup-and-project-creation.md)
+2. [Modules](docs/02-modules.md)
+3. [Controllers & Routing](docs/03-controllers-and-routing.md)
+4. [Services & Dependency Injection](docs/04-services-and-dependency-injection.md)
+5. [DTOs & Validation](docs/05-dto-and-validation.md)
+6. [Database Integration (Prisma + PostgreSQL)](docs/06-database-integration.md)
+7. [Error Handling](docs/07-error-handling.md)
+8. [API Documentation with Swagger](docs/08-api-documentation-swagger.md)
+9. [Architecture Review](docs/09-architecture-review.md)
 
 ## What you'll build
 
@@ -37,7 +37,7 @@ Swagger UI to try it all from the browser.
 
 ## The finished code
 
-[`task-management-api/`](task-management-api/README.md) holds the complete
-project in its Part 9 end state, ready to run. Build it yourself by
-following the parts in order — then use that folder to compare against
-when something doesn't line up.
+[`examples/task-management-api/`](examples/task-management-api/README.md)
+holds the complete project in its Part 9 end state, ready to run. Build it
+yourself by following the parts in order — then use that folder to
+compare against when something doesn't line up.

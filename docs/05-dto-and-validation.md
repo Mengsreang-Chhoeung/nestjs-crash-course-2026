@@ -148,4 +148,4 @@ Returns a `400 Bad Request` with a message explaining `title` is required
 
 ---
 
-Next: [Part 6 — Database Integration (Prisma + PostgreSQL)](../06-database-integration/README.md)
+Next: [Part 6 — Database Integration (Prisma + PostgreSQL)](06-database-integration.md)

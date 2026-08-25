@@ -1,6 +1,6 @@
 # Task Management API — Reference Implementation
 
-The finished app from the [NestJS crash course](../README.md), in its
+The finished app from the [NestJS crash course](../../README.md), in its
 **Part 9 end state**: five REST routes backed by PostgreSQL through
 Prisma, with DTO validation, HTTP exceptions, and Swagger docs.
 
@@ -10,7 +10,7 @@ first; use this to compare against when something doesn't work.
 
 ## Running it
 
-You need Node 18+ (see [Part 1](../01-setup-and-project-creation/README.md))
+You need Node 18+ (see [Part 1](../../docs/01-setup-and-project-creation.md))
 and Docker.
 
 ```bash
