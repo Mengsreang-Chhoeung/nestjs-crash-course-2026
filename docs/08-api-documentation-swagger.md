@@ -136,6 +136,9 @@ real `POST` or `PATCH` without leaving the browser.
   a hand-written docs page can — but only if you keep the decorators
   updated when a route's actual behavior changes.
 
+**Official docs:**
+- [OpenAPI (Swagger) Introduction](https://docs.nestjs.com/openapi/introduction)
+
 ---
 
 Next: [Part 9 — Architecture Review](09-architecture-review.md)

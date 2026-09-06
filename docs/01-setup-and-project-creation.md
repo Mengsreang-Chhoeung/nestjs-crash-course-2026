@@ -172,6 +172,10 @@ served by the placeholder `AppController`.
   stop that process or start on a different port — `app.listen` already
   reads `process.env.PORT`, so `PORT=3001 npm run start:dev` is enough.
 
+**Official docs:**
+- [CLI Overview](https://docs.nestjs.com/cli/overview)
+- [First Steps](https://docs.nestjs.com/first-steps)
+
 ---
 
 Next: [Part 2 — Modules](02-modules.md)

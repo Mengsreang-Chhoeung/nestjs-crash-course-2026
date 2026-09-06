@@ -146,6 +146,9 @@ Every route responds — with placeholder data for now.
   it now, before it becomes a habit. See [Part 4](04-services-and-dependency-injection.md)
   for why.
 
+**Official docs:**
+- [Controllers](https://docs.nestjs.com/controllers)
+
 ---
 
 Next: [Part 4 — Services & Dependency Injection](04-services-and-dependency-injection.md)

@@ -126,6 +126,9 @@ and stays untouched while the real logic gets built underneath it.
   needs `TasksService`, it must be exported from `TasksModule` and
   imported into `OrdersModule` — see [Part 2](02-modules.md).
 
+**Official docs:**
+- [Providers](https://docs.nestjs.com/providers)
+
 ---
 
 Next: [Part 5 — DTOs & Validation](05-dto-and-validation.md)

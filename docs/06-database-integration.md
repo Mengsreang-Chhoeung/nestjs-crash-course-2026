@@ -245,6 +245,9 @@ shape gets formalized in [Part 7](07-error-handling.md).
   `findOne` guard above, which [Part 7](07-error-handling.md)
   builds on.
 
+**Official docs:**
+- [NestJS + Prisma recipe](https://docs.nestjs.com/recipes/prisma)
+
 ---
 
 Next: [Part 7 — Error Handling](07-error-handling.md)

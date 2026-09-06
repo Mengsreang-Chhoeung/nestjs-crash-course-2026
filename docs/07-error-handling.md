@@ -113,6 +113,9 @@ Run that same command twice — the second call returns `409 Conflict`.
   point of status codes — callers (and tools like Swagger, [Part 8](08-api-documentation-swagger.md))
   can no longer tell success from failure without parsing the body.
 
+**Official docs:**
+- [Exception Filters](https://docs.nestjs.com/exception-filters)
+
 ---
 
 Next: [Part 8 — API Documentation with Swagger](08-api-documentation-swagger.md)

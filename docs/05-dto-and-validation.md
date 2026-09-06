@@ -146,6 +146,10 @@ Returns a `400 Bad Request` with a message explaining `title` is required
   DTO/pipe layer instead — it runs before the controller method is even
   called, and keeps the rule in one declarative place.
 
+**Official docs:**
+- [Validation](https://docs.nestjs.com/techniques/validation)
+- [Pipes](https://docs.nestjs.com/pipes)
+
 ---
 
 Next: [Part 6 — Database Integration (Prisma + PostgreSQL)](06-database-integration.md)

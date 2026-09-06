@@ -105,6 +105,9 @@ ultimately gets registered, directly or through another module.
   feature module. Do this a few times and `AppModule` becomes unreadable —
   one module per domain, from the start.
 
+**Official docs:**
+- [Modules](https://docs.nestjs.com/modules)
+
 ---
 
 Next: [Part 3 — Controllers & Routing](03-controllers-and-routing.md)
