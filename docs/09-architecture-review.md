@@ -13,6 +13,8 @@
 
 ```text
 src/
+├── generated/
+│   └── prisma/          # generated Prisma Client (gitignored)
 ├── prisma/
 │   ├── prisma.module.ts
 │   └── prisma.service.ts
@@ -28,6 +30,8 @@ src/
 
 prisma/
 └── schema.prisma
+
+prisma.config.ts
 ```
 
 Every file here was built incrementally, in this order:
@@ -39,7 +43,7 @@ Every file here was built incrementally, in this order:
 | [3](03-controllers-and-routing.md) | `tasks.controller.ts` |
 | [4](04-services-and-dependency-injection.md) | `tasks.service.ts` (in-memory) |
 | [5](05-dto-and-validation.md) | `dto/`, `ValidationPipe` |
-| [6](06-database-integration.md) | `prisma/`, `tasks.service.ts` rewritten against Prisma |
+| [6](06-database-integration.md) | `prisma/`, `prisma.config.ts`, `tasks.service.ts` rewritten against Prisma |
 | [7](07-error-handling.md) | `NotFoundException` / `ConflictException` usage |
 | [8](08-api-documentation-swagger.md) | Swagger UI at `/api` |
 

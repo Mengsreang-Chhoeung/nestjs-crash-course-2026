@@ -63,7 +63,7 @@ real PostgreSQL database, and documented with Swagger.
 
 You need:
 
-- **Node.js** 18 or later (`node -v` to check)
+- **Node.js** 20.19+ or 22.12+ (`node -v` to check)
 - **npm** (ships with Node)
 
 The recommended way to install Node.js is via **nvm** (Node Version
@@ -104,8 +104,11 @@ npm install -g @nestjs/cli
 nest new task-management-api
 ```
 
-The CLI asks which package manager to use — pick **npm**. It scaffolds a
-full project, installs dependencies, and initializes a git repo.
+The CLI asks which package manager to use — pick **npm**. It also asks
+whether to scaffold a CommonJS or an ESM project — pick **CommonJS**, which
+is what the rest of this crash course (and its Jest/ESLint setup) assumes.
+It then scaffolds a full project, installs dependencies, and initializes a
+git repo.
 
 ## 6. The Generated Folder Structure
 

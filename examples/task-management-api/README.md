@@ -10,7 +10,7 @@ first; use this to compare against when something doesn't work.
 
 ## Running it
 
-You need Node 18+ (see [Part 1](../../docs/01-setup-and-project-creation.md))
+You need Node 20.19+ or 22.12+ (see [Part 1](../../docs/01-setup-and-project-creation.md))
 and Docker.
 
 ```bash
@@ -27,6 +27,7 @@ docker compose up -d
 
 ```bash
 npx prisma migrate dev
+npx prisma generate
 ```
 
 ```bash

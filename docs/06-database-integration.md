@@ -10,6 +10,12 @@
 6. [Rewriting `TasksService` Against Prisma](#6-rewriting-tasksservice-against-prisma)
 7. [Beginner Pitfalls](#7-beginner-pitfalls)
 
+> **Note:** this part targets **Prisma v7**, the current stable release —
+> not v6 (the previous stable line) and not v8 (still release-candidate
+> only at the time of writing). Pin versions explicitly as shown below,
+> since a bare `npm install prisma` can resolve to whichever line is
+> tagged `latest` on npm at the time you run it.
+
 ---
 
 ## 1. Why a Real Database
@@ -72,11 +78,16 @@ against a database that's still booting. The named volume means your data
 survives `docker compose down` — use `docker compose down -v` when you
 actually want a clean slate.
 
-Then install Prisma and initialize it:
+Then install Prisma and initialize it. Prisma v7 dropped its old Rust
+query engine in favor of a TypeScript + WASM one, which means a **driver
+adapter** is now required for every database — for PostgreSQL that's
+`@prisma/adapter-pg`, backed by the `pg` driver:
 
 ```bash
-npm install prisma --save-dev
-npm install @prisma/client
+npm install prisma@7 --save-dev
+npm install @prisma/client@7
+npm install @prisma/adapter-pg pg dotenv
+npm install --save-dev @types/pg
 npx prisma init
 ```
 
@@ -88,17 +99,53 @@ npx prisma init
 DATABASE_URL="postgresql://postgres:postgres@localhost:5432/task_api?schema=public"
 ```
 
+Prisma v7 also stopped auto-loading `.env` — for the CLI *or* the running
+app — so the connection string has to be wired up explicitly in two
+places: a `prisma.config.ts` for CLI commands like `migrate`, and the
+driver adapter itself for the running app (covered in
+[§5](#5-a-prismaservice)).
+
+```ts
+// prisma.config.ts
+import 'dotenv/config';
+import { defineConfig, env } from 'prisma/config';
+
+export default defineConfig({
+  schema: 'prisma/schema.prisma',
+  datasource: {
+    url: env('DATABASE_URL'),
+  },
+});
+```
+
+> **Note:** the datasource `url` used to live directly in
+> `schema.prisma`. As of v7 it's configured here instead — the schema's
+> `datasource` block just declares the database `provider` now.
+
+`prisma.config.ts` lives at the project root, alongside `package.json` —
+outside `src/`. Nest's default `tsconfig.json` sets `rootDir: "./src"`,
+and TypeScript refuses to build a project that pulls in a file from
+outside its `rootDir`, so exclude it from both TypeScript configs:
+
+```json
+// tsconfig.json and tsconfig.build.json
+{
+  "exclude": ["node_modules", "dist", "test", "prisma.config.ts"]
+}
+```
+
 ## 3. Defining the `Task` Model
 
 ```prisma
 // prisma/schema.prisma
 generator client {
-  provider = "prisma-client-js"
+  provider     = "prisma-client"
+  output       = "../src/generated/prisma"
+  moduleFormat = "cjs"
 }
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
 }
 
 model Task {
@@ -111,18 +158,31 @@ model Task {
 ```
 
 This mirrors the `Task` shape from [Part 4](04-services-and-dependency-injection.md) —
-Prisma's schema is the new single source of truth for it.
+Prisma's schema is the new single source of truth for it. `moduleFormat =
+"cjs"` matters here: v7's `prisma-client` generator produces ESM by
+default, which won't `require()` into this CommonJS NestJS project (see
+[Part 1](01-setup-and-project-creation.md#5-creating-the-project)).
+
+> **Note:** the `output` path is `src/generated/prisma`, not a top-level
+> `generated/` — same `rootDir` reason as `prisma.config.ts` above, this
+> time sidestepped by keeping the generated client inside `src/` instead
+> of excluding it. Add `/src/generated` to `.gitignore`; it's regenerated
+> code, not something to commit.
 
 ## 4. Running the Migration
 
 ```bash
 npx prisma migrate dev --name init
+npx prisma generate
 ```
 
-This creates the `Task` table in PostgreSQL, and generates a fully typed
-Prisma Client into `node_modules/@prisma/client` matching your schema
-exactly — `prisma.task.findMany()` is typed, autocompletes, and would fail
-to compile if the schema didn't have a `Task` model.
+This creates the `Task` table in PostgreSQL. As of v7, `migrate dev` no
+longer regenerates the client for you, so the `prisma generate` step is
+required every time the schema changes — it produces a fully typed Prisma
+Client into `src/generated/prisma/` (per the `output` path set in
+[§3](#3-defining-the-task-model)), matching your schema exactly —
+`prisma.task.findMany()` is typed, autocompletes, and would fail to
+compile if the schema didn't have a `Task` model.
 
 ## 5. A `PrismaService`
 
@@ -138,10 +198,15 @@ nest generate service prisma
 ```ts
 // src/prisma/prisma.service.ts
 import { Injectable, OnModuleInit, OnModuleDestroy } from '@nestjs/common';
-import { PrismaClient } from '@prisma/client';
+import { PrismaClient } from '../generated/prisma/client';
+import { PrismaPg } from '@prisma/adapter-pg';
 
 @Injectable()
 export class PrismaService extends PrismaClient implements OnModuleInit, OnModuleDestroy {
+  constructor() {
+    super({ adapter: new PrismaPg({ connectionString: process.env.DATABASE_URL }) });
+  }
+
   async onModuleInit() {
     await this.$connect();
   }
@@ -150,6 +215,22 @@ export class PrismaService extends PrismaClient implements OnModuleInit, OnModul
     await this.$disconnect();
   }
 }
+```
+
+The `PrismaClient` import now comes from the generated output path, not
+`@prisma/client` directly, and the driver adapter (`PrismaPg`) is what
+actually opens the PostgreSQL connection — `PrismaClient` itself no longer
+knows how to talk to a database without one.
+
+`process.env.DATABASE_URL` has to already be populated by the time this
+constructor runs, and Prisma won't load `.env` for you at runtime anymore.
+Add this as the very first line of `src/main.ts` — before any other
+import — so it runs before Nest builds the module graph (and therefore
+before `PrismaService` is constructed):
+
+```ts
+// src/main.ts
+import 'dotenv/config';
 ```
 
 ```ts
@@ -186,7 +267,10 @@ export class TasksModule {}
 ## 6. Rewriting `TasksService` Against Prisma
 
 Same public method signatures as [Part 4](04-services-and-dependency-injection.md) —
-`TasksController` doesn't change at all — only what's inside each method:
+`TasksController` doesn't change at all — only what's inside each method.
+None of this changes from the driver-adapter switch above either — Prisma
+Client's query API (`findMany`, `findUnique`, `create`, `update`,
+`delete`) is identical regardless of how the client was constructed:
 
 ```ts
 // src/tasks/tasks.service.ts
@@ -233,10 +317,14 @@ shape gets formalized in [Part 7](07-error-handling.md).
 
 ## 7. Beginner Pitfalls
 
-- **Forgetting to re-run `npx prisma generate`** after editing
-  `schema.prisma` without `migrate dev` (e.g. after pulling someone
-  else's schema change) — the typed client goes stale and won't match the
-  database.
+- **Forgetting to run `npx prisma generate`.** As of v7, neither
+  `migrate dev` nor `db push` runs it for you anymore — after any schema
+  change, generate explicitly or the typed client goes stale and won't
+  match the database.
+- **Forgetting the `import 'dotenv/config'` in `main.ts`.** Without it,
+  `process.env.DATABASE_URL` is `undefined` when `PrismaService`
+  constructs its adapter, and the app fails to connect — Prisma no longer
+  loads `.env` on its own.
 - **Committing `.env` with real credentials.** Keep `.env` out of version
   control; commit a `.env.example` instead.
 - **Calling `prisma.task.update` without checking existence first.**
