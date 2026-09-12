@@ -10,6 +10,13 @@ It's for developers who are brand new to NestJS, or who've only skimmed
 the [official docs](https://docs.nestjs.com/). No prior production
 backend experience assumed.
 
+## Watch the video
+
+📺 [Watch the full crash course on YouTube](https://www.youtube.com/watch?v=_iZSC-XEZ6o)
+
+Follow along with the video and use this repo as your reference — every
+part below matches a section of the build.
+
 ## Table of Contents
 
 1. [Setup & Project Creation](docs/01-setup-and-project-creation.md)
